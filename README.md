@@ -2,6 +2,8 @@ This tool is supposed to resemble a local tool that functions quite similarly to
 
 The tool is utilising an LLM on a pdf that helps you find stuff in a pdf and answers questions for you.
 
+To **display the actual PDF file** (not just its text content) within a Tkinter application, we can use an external library like *PyMuPDF* (also known as fitz). This library allows you to render PDF pages as images, which you can then display in your Tkinter application using the *PhotoImage* or *ImageTk.PhotoImage* classes.
+
 UI will be built with *customtkinter*, an extension of the regular *tkinter* that allows for more modern looking interfaces.
 
 The LLM will be built utilizing open source LLMs like *haystack*.
