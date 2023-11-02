@@ -7,7 +7,9 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 root = customtkinter.CTk()
+
 root.geometry("1200x500")
+
 
 def upload_pdf():
     filepath = filedialog.askopenfilename(
@@ -65,8 +67,11 @@ upload_button = customtkinter.CTkButton(
     font=("Arial", 18))
 upload_button.pack(pady=30, padx=10)
 
+
 # Create a Text widget to display PDF content on the left
 pdf_text = tk.Text(master=viewer_frame, wrap="none")
+
+
 pdf_text.pack(pady=10, padx=10, fill="both", expand=True)
 
 # Create a Text widget for the chatbox on the right
