@@ -7,10 +7,7 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 root = customtkinter.CTk()
-
-#Maximize window or set dimensions manually
-root.after(0, lambda:root.state('zoomed'))
-#root.geometry("1000x500")
+root.geometry("1000x500")
 
 def upload_pdf():
     filepath = filedialog.askopenfilename(
@@ -52,7 +49,7 @@ upload_button = customtkinter.CTkButton(
 upload_button.pack(pady=30, padx=10)
 
 # Create a Text widget to display PDF content
-pdf_text = customtkinter.Textbox(master=frame, wrap="none", font=("Arial", 24))
+pdf_text = tk.Text(master=frame, wrap="none")
 pdf_text.pack(pady=10, padx=10, fill="both", expand=True)
 
 root.mainloop()
