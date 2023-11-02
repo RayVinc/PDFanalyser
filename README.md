@@ -8,3 +8,6 @@ The LLM will be built utilizing open source LLMs like *haystack*.
 
 # The User Interface
 ![pdfUI](https://github.com/UKVeteran/PDFanalyser/assets/39216339/013a9e4e-bd8d-48ac-9ac0-7ecebcd9370b)
+
+# Planned Layout
+![planned layout](interface_layout.png)
