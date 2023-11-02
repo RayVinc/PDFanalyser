@@ -1,14 +1,13 @@
 import customtkinter
 from customtkinter import filedialog
 from PyPDF2 import PdfReader
+import tkinter as tk
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 root = customtkinter.CTk()
 root.geometry("1000x500")
-
-
 
 def upload_pdf():
     filepath = filedialog.askopenfilename(
@@ -18,35 +17,39 @@ def upload_pdf():
     if filepath:
         print(f"File path: {filepath}")
 
-        # open the PDF file
-        with open(filepath, "rb") as f:
-            reader = PdfReader(f)
-            text = ""
+        # Open the PDF file
+        reader = PdfReader(filepath)
+        text = ""
 
-            # loop through all the pages
-            for i in range(reader.numPages):
-                page = reader.getPage(i)
-                text += page.extractText()
+        # Loop through all the pages
+        for page in reader.pages:
+            text += page.extract_text()
 
-            print("Extracted text from the PDF:")
-            print(text)
+        pdf_text.delete("1.0", "end")  # Clear any previous text
+        pdf_text.insert("1.0", text)  # Insert the extracted text into the Text widget
+
+        print("Extracted text from the PDF:")
+        print(text)
 
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text = "PDF Analyser", font=("Roboto", 40))
+label = customtkinter.CTkLabel(master=frame, text="PDF Analyzer", font=("Roboto", 40))
 label.pack(pady=12, padx=10)
 
-# upload button
+# Upload button
 upload_button = customtkinter.CTkButton(
-    master=root, 
-    text="Upload PDF", 
-    corner_radius=10, 
+    master=frame,
+    text="Upload PDF",
+    corner_radius=10,
     command=upload_pdf,
     width=200,
     height=50,
     font=("Arial", 18))
-upload_button.place(relx=0.5, rely=0.5, anchor=customtkinter.CENTER)
 upload_button.pack(pady=30, padx=10)
+
+# Create a Text widget to display PDF content
+pdf_text = tk.Text(master=frame, wrap="none")
+pdf_text.pack(pady=10, padx=10, fill="both", expand=True)
 
 root.mainloop()
