@@ -1,7 +1,8 @@
 import customtkinter
 from customtkinter import filedialog
 import tkinter as tk
-from PyPDF2 import PdfReader
+from PIL import Image, ImageTk
+import fitz  # PyMuPDF
 from transformers import pipeline
 
 customtkinter.set_appearance_mode("dark")
@@ -25,6 +26,9 @@ pdf_text.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 button_frame = customtkinter.CTkFrame(master=root)
 button_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
+# Store rendered images from the PDF
+pdf_images = []
+
 def upload_pdf():
     filepath = filedialog.askopenfilename(
         initialdir="/", title="Select file",
@@ -33,22 +37,36 @@ def upload_pdf():
     if filepath:
         print(f"File path: {filepath}")
 
-        # Open the PDF file and extract text
-        pdf_content = extract_text_from_pdf(filepath)
+        # Open the PDF file and extract text and images
+        pdf_content, images = extract_pdf_contents(filepath)
 
         pdf_text.delete("1.0", "end")  # Clear any previous text
         pdf_text.insert("1.0", pdf_content)  # Insert the extracted text into the Text widget
 
-        print("Extracted text from the PDF:")
-        print(pdf_content)
+        # Display the images in the viewer
+        display_images(images)
 
-def extract_text_from_pdf(pdf_filepath):
+        print("Extracted text and images from the PDF")
+
+def extract_pdf_contents(pdf_filepath):
     text = ""
-    with open(pdf_filepath, "rb") as pdf_file:
-        pdf_reader = PdfReader(pdf_file)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
-    return text
+    images = []
+    pdf_document = fitz.open(pdf_filepath)
+    for page_num in range(len(pdf_document)):
+        page = pdf_document.load_page(page_num)
+        text += page.get_text()
+        images.append(page.get_pixmap())  # Append the pixmap to the list
+
+    return text, images
+
+def display_images(images):
+    for image in images:
+        image_pil = Image.frombytes("RGB", [image.width, image.height], image.samples)
+        image_tk = ImageTk.PhotoImage(image_pil)
+        pdf_images.append(image_tk)
+        image_label = tk.Label(viewer_frame, image=image_tk)
+        image_label.image = image_tk  # Keep a reference to the ImageTk object
+        image_label.grid(pady=10, padx=10)
 
 def submit_question():
     question = question_entry.get()
