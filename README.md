@@ -9,7 +9,9 @@ UI will be built with *customtkinter*, an extension of the regular *tkinter* tha
 The LLM will be built utilizing open source LLMs like *haystack*.
 
 # The User Interface So Far
-![pdfUI1](https://github.com/RayVinc/PDFanalyser/assets/39216339/8d0e5e30-6dab-4560-86ea-5e8df5ce5bb0)
+
+![pdfUI2](https://github.com/UKVeteran/PDFanalyser/assets/39216339/1dc1e681-5c98-4f6c-a1b0-b553eb27bcfc)
+
 
 
 # Planned Layout
