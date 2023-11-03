@@ -61,7 +61,7 @@ def submit_question():
         chat_text.insert("end", f"Analyzer: {answer['answer']}\n")
         question_entry.delete(0, "end")
 
-label = customtkinter.CTkLabel(master=button_frame, text="PDF Analyzer", font=("Roboto", 40))
+label = customtkinter.CTkLabel(master=button_frame, text="PDF Analyzer", font=("Arial", 32))
 label.grid(row=0, column=0, pady=12, padx=10)
 
 # Upload button
@@ -72,7 +72,8 @@ upload_button = customtkinter.CTkButton(
     command=upload_pdf,
     width=200,
     height=50,
-    font=("Arial", 18))
+    font=("Arial", 18)
+)
 upload_button.grid(row=1, column=0, pady=30, padx=10)
 
 # Create a Text widget for the chatbox on the right
