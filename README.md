@@ -8,10 +8,9 @@ UI will be built with *customtkinter*, an extension of the regular *tkinter* tha
 
 The LLM will be built utilizing open source LLMs like *haystack*.
 
-# The User Interface So Far
-
-![pdfUI2](https://github.com/UKVeteran/PDFanalyser/assets/39216339/1dc1e681-5c98-4f6c-a1b0-b553eb27bcfc)
-
+# The User Interface So Far (interface.py)
+Rendered PDF is not displayed well currently, and is displayed as image copy of PDF file. Ideally, the PDF is a functional PDF viewer, where text can be highlighted and copied.
+![pdfUI3](interface.png)
 
 
 # Planned Layout
